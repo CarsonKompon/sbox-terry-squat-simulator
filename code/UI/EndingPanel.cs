@@ -206,6 +206,8 @@ namespace TSS.UI
 					{
 						ConsoleSystem.Run( "credits" );
 						CreditsStarted = true;
+						Credits = Add.Label( "TEST", "credits" );
+						Credits.Text = CreditsString();
 
 					}
 					f = 1f - ((TimeSinceEnded - 2f) / 5f);

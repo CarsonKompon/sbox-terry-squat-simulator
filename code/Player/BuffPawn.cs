@@ -8,7 +8,7 @@ using TSS;
 namespace TSS
 {
 
-	partial class BuffPawn : TSS.Player
+	partial class BuffPawn : Player
 	{
 		[Net] private bool InSpace { get; set; } = true;
 		Particles PortalPartic;

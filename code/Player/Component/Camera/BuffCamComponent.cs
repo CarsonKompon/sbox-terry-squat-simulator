@@ -2,7 +2,7 @@
 
 namespace TSS
 {
-	public class BuffCamComponent : EntityComponent<TSSPlayer>
+	class BuffCamComponent : EntityComponent<BuffPawn>
 	{
 		[ConVar.Replicated] public static bool thirdperson_orbit { get; set; } = false;
 
@@ -13,7 +13,7 @@ namespace TSS
 		private Angles orbitAngles;
 		private float orbitDistance = 150;
 
-		[GameEvent.Client.Frame]
+		[GameEvent.Client.PostCamera]
 		public void OnFrame()
 		{
 			Camera.Position = Entity.Position;
