@@ -85,8 +85,6 @@ namespace TSS
 		internal void Update()
 		{
 			if(Entity != Game.LocalPawn) return;
-
-			Log.Info("ayaya");
 			
 			yaw = yaw.LerpTo( yawTar, Time.Delta * 2f );
 
@@ -270,10 +268,10 @@ namespace TSS
 
 				var center = pawn.ExercisePosition + Vector3.Up * IntroCamHeight;
 
-				CamDistance = 125f - 50f * (Progress / 0.25f);
+				CamDistance = 200f - 50f * (Progress / 0.25f);
 				IntroCamHeight = 45f;
-				Entity.Position = center + pawn.Rotation.Forward * CamDistance;
-				Entity.Rotation = Rotation.LookAt( (center - Entity.Position), Vector3.Up );
+				Camera.Position = center + pawn.Rotation.Forward * CamDistance;
+				Camera.Rotation = Rotation.LookAt( (center - Camera.Position), Vector3.Up );
 				yaw = 30f;
 				yawTar = 30f;
 			}
@@ -322,13 +320,13 @@ namespace TSS
 
 				float p = (Progress - 0.25f) / 0.24f;
 				p = p.Clamp( 0, 1f );
-				CamDistance = 150f;
-				IntroCamHeight = 20f;
+				CamDistance = 180f;
+				IntroCamHeight = 40f;
 				var center = pawn.ExercisePosition + Vector3.Up * IntroCamHeight;
 
 				yawTar = MathX.LerpTo( 30f, 120f, p );
-				Entity.Position = center + Rotation.FromYaw( yaw ).Forward * CamDistance;
-				Entity.Rotation = Rotation.LookAt( center - Entity.Position, Vector3.Up );
+				Camera.Position = center + Rotation.FromYaw( yaw ).Forward * CamDistance;
+				Camera.Rotation = Rotation.LookAt( center - Camera.Position, Vector3.Up );
 
 				//TSSGame.Current.SetSingleTarVolume( 1 );
 				TSSGame.Current.SetTarVolume( 2 );
@@ -357,7 +355,7 @@ namespace TSS
 			{
 				float p = (Progress - 0.5f) / 0.25f;
 				p = p.Clamp( 0, 1f );
-				CamDistance = 50f;
+				CamDistance = 120f;
 				IntroCamHeight = 32f + 32f * p;
 
 				var center = pawn.ExercisePosition + Vector3.Up * IntroCamHeight;
@@ -373,8 +371,8 @@ namespace TSS
 			{
 				float p = (Progress - 0.75f) / 0.24f;
 				p = p.Clamp( 0, 1f );
-				CamDistance = 50f + 50f * p;
-				IntroCamHeight = 64f - 19f * p;
+				CamDistance = 100f + 50f * p;
+				IntroCamHeight = 68f - 19f * p;
 
 				TSS ??= new CreditPanel( "Terry\nSquat\nSimulator", 3200, 3200 );
 				TSS.Position = pawn.ExercisePosition + Vector3.Up * -26f + pawn.Rotation.Forward * 20f;
@@ -415,7 +413,7 @@ namespace TSS
 
 		public void FollowPlayer()
 		{
-			CamDistance = 125f;
+			CamDistance = 200f;
 			float p = TimedProgress;
 			p = p.Clamp( 0, 1f );
 			if(Game.LocalPawn is not TSSPlayer pawn) return;
@@ -434,7 +432,7 @@ namespace TSS
 
 		public void Ground()
 		{
-			CamDistance = 125f;
+			CamDistance = 180f;
 			float p = TimedProgress;
 			p = p.Clamp( 0, 1f );
 			if(Game.LocalPawn is not TSSPlayer pawn) return;
@@ -452,7 +450,7 @@ namespace TSS
 
 		public void StaticPlayer()
 		{
-			CamDistance = 100f;
+			CamDistance = 200f;
 			if(Game.LocalPawn is not TSSPlayer pawn) return;
 			var center = GetCenter();
 
@@ -491,7 +489,7 @@ namespace TSS
 
 		public void Topdown()
 		{
-			CamDistance = 100f;
+			CamDistance = 160f;
 			if(Game.LocalPawn is not TSSPlayer pawn) return;
 			var center = GetCenter();
 
@@ -557,7 +555,7 @@ namespace TSS
 		{
 			if ( CamState == CameraState.Ground )
 			{
-				return 15f;
+				return 30f;
 			}
 			else if ( Entity.CurrentExercise == Exercise.Run )
 			{
