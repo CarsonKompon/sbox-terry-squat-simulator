@@ -39,7 +39,7 @@ namespace TSS.UI
 			float val = (MyQT.TimeSinceSpawned - (MyQT.MyTime + 0.15f)) / 0.5f;
 			float growth = val.Clamp( 0f, 1f );
 
-			if ( Local.Pawn is TSSPlayer pl )
+			if ( Game.LocalPawn is TSSPlayer pl )
 			{
 				if ( pl.CanGoToHeaven )
 				{

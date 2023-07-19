@@ -4,7 +4,7 @@ using System;
 
 namespace TSS
 {
-	public partial class SquatComponenet : ExerciseComponent
+	public partial class SquatComponent : ExerciseComponent
 	{
 		#region Members
 		/// <summary>
@@ -24,10 +24,10 @@ namespace TSS
 			ExerciseType = Exercise.Squat;
 		}
 
-		public override void Simulate( Client client )
+		public override void Simulate( IClient client )
 		{
 			base.Simulate( client );
-			var cam = Entity.CameraMode as TSSCamera;
+			var cam = Entity.Components.GetOrCreate<TSSCameraComponent>();
 			SimulateSquatting( cam );
 
 		}
@@ -78,7 +78,7 @@ namespace TSS
 		/// The Squatting exercise
 		/// </summary>
 		/// <param name="cam"></param>
-		public void SimulateSquatting( TSSCamera cam )
+		public void SimulateSquatting( TSSCameraComponent cam )
 		{
 			if ( cam == null )
 			{
@@ -105,12 +105,12 @@ namespace TSS
 				cam.Progress += Time.Delta * 0.35f;
 			}
 
-			if ( Input.Pressed( InputButton.Forward ) && Input.Pressed( InputButton.Back ) )
+			if ( Input.Pressed( "forward" ) && Input.Pressed( "backward" ) )
 			{
 				return;
 			}
 
-			if ( Input.Pressed( InputButton.Forward ) && (Squat == 0 || Squat == -1) && Entity.TimeSinceDownPressed > TSSGame.QUARTER_NOTE_DURATION )
+			if ( Input.Pressed( "forward" ) && (Squat == 0 || Squat == -1) && Entity.TimeSinceDownPressed > TSSGame.QUARTER_NOTE_DURATION )
 			{
 
 				if ( Squat == 0 )
@@ -132,7 +132,7 @@ namespace TSS
 
 			}
 
-			if ( Input.Pressed( InputButton.Back ) && (Squat == 1 || Squat == -1) && Entity.TimeSinceUpPressed > TSSGame.QUARTER_NOTE_DURATION )
+			if ( Input.Pressed( "backward" ) && (Squat == 1 || Squat == -1) && Entity.TimeSinceUpPressed > TSSGame.QUARTER_NOTE_DURATION )
 			{
 				Squat = 0;
 				Entity.TimeSinceDownPressed = 0;

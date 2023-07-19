@@ -2,13 +2,7 @@
 
 Layer0
 {
-	shader "vr_simple.vfx"
-
-	//---- PBR ----
-	F_METALNESS_TEXTURE 1
-
-	//---- Ambient Occlusion ----
-	TextureAmbientOcclusion "materials/default/default_ao.tga"
+	shader "shaders/simple.shader"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
@@ -21,17 +15,14 @@ Layer0
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
 	//---- Metalness ----
-	TextureMetalness "models/dumbbll/materials/stick_metal.png"
+	g_flMetalness "0.000"
 
 	//---- Normal ----
 	TextureNormal "models/dumbbll/materials/stick_normal.png"
 
 	//---- Roughness ----
+	g_flRoughnessScaleFactor "1.000"
 	TextureRoughness "models/dumbbll/materials/stick_rough.png"
 
 	//---- Texture Coordinates ----

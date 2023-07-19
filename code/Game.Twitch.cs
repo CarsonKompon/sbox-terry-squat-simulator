@@ -14,7 +14,7 @@ namespace TSS
 		public string Color;
 	}
 
-	public partial class TSSGame : Game
+	public partial class TSSGame
 	{
 		public static Queue<GenericMessage> Queue = new Queue<GenericMessage>();
 
@@ -42,8 +42,6 @@ namespace TSS
 		public static void OnStreamMessage( StreamChatMessage message )
 		{
 
-			Log.Info( Host.IsClient );
-
 			var msg = new GenericMessage()
 			{
 				Message = message.Message,
@@ -56,7 +54,7 @@ namespace TSS
 		}
 
 		[ClientRpc]
-		public void AddHudMessage(string msg, string disp, string col)
+		public static void AddHudMessage(string msg, string disp, string col)
 		{
 			var item = new GenericMessage()
 			{
@@ -76,7 +74,7 @@ namespace TSS
 		[ConCmd.Server( "twitch_simulate" )]
 		public static void Say( string message , string name, string c)
 		{
-			Assert.NotNull( ConsoleSystem.Caller );
+			if(ConsoleSystem.Caller == null) return;
 
 			if ( message.Contains( '\n' ) || message.Contains( '\r' ) ) 
 				return;
@@ -127,7 +125,7 @@ namespace TSS
 					}
 					else
 					{
-						TSSGame.Current.AddHudMessage( msg.Message, msg.DisplayName, msg.Color );
+						TSSGame.AddHudMessage( msg.Message, msg.DisplayName, msg.Color );
 					}			
 				}
 			}

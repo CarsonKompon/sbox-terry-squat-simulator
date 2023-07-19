@@ -2,14 +2,7 @@
 
 Layer0
 {
-	shader "vr_simple.vfx"
-
-	//---- PBR ----
-	F_AMBIENT_OCCLUSION_TEXTURE 1
-	F_METALNESS_TEXTURE 1
-
-	//---- Ambient Occlusion ----
-	TextureAmbientOcclusion "models/treadmill/textures/treadmill_body_ao.png"
+	shader "shaders/simple.shader"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
@@ -22,17 +15,14 @@ Layer0
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
 	//---- Metalness ----
-	TextureMetalness "models/treadmill/textures/treadmill_body_metal.png"
+	g_flMetalness "0.000"
 
 	//---- Normal ----
 	TextureNormal "models/treadmill/textures/treadmill_body_normal.png"
 
 	//---- Roughness ----
+	g_flRoughnessScaleFactor "1.000"
 	TextureRoughness "models/treadmill/textures/treadmill_body_rough.png"
 
 	//---- Texture Coordinates ----

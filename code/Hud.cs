@@ -1,4 +1,5 @@
-﻿using Sandbox.UI;
+﻿using Sandbox;
+using Sandbox.UI;
 using TSS.UI;
 
 namespace TSS
@@ -9,7 +10,7 @@ namespace TSS
 
 		public TSSHud()
 		{
-			if ( IsClient )
+			if ( Game.IsClient )
 			{
 				Instance = this;
 				RootPanel.AddChild<UIPanel>();

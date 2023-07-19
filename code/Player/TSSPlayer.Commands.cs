@@ -44,6 +44,7 @@ namespace TSS
 		[ConCmd.Server( "queue_random_track")]
 		public static void QueueRandomTrack()
 		{
+			Random Rand = new Random();
 			int i = Rand.Int( 0, 3 );
 			TSSGame.Current.QueueTrack( $"layer{i}" );
 		}
@@ -56,6 +57,7 @@ namespace TSS
 		{
 			if ( ConsoleSystem.Caller.Pawn is TSSPlayer player )
 			{
+				Random Rand = new Random();
 				var pt = new PunchQT();
 				pt.Player = player;
 				pt.TargetTime = 1f;

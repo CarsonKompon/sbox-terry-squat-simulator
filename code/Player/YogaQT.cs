@@ -36,6 +36,8 @@ namespace TSS
 		public override void Spawn()
 		{
 			base.Spawn();
+			
+			Random Rand = new Random();
 
 			pose = Rand.Int( 0, 4 );
 
@@ -53,21 +55,10 @@ namespace TSS
 
 		}
 
-		[Event.Tick]
-		public void Sim()
+		[GameEvent.Client.BuildInput]
+		public void BuildYogaInput( )
 		{
-			if ( IsServer )
-			{
-				return;
-			}
-
-			
-
-		}
-
-		[Event.BuildInput]
-		public void BuildYogaInput( InputBuilder input )
-		{
+			Random Rand = new Random();
 			if ( currentCombo == null )
 			{
 				currentCombo = Rand.FromArray( combos );
@@ -76,9 +67,9 @@ namespace TSS
 			index = index.Clamp( 0, currentCombo.Length - 1 );
 			var type = currentCombo[index];
 
-			bool b = CheckType( type , input);
+			bool b = CheckType( type );
 
-			if ( CheckFailure( type , input) )
+			if ( CheckFailure( type ) )
 			{
 				Panel.Failed = true;
 				Panel.TimeSinceFinished = 0;
@@ -100,7 +91,7 @@ namespace TSS
 
 			if ( Player.CurrentExercise != Exercise.Yoga )
 			{
-				if ( IsServer )
+				if ( Game.IsServer )
 				{
 					Delete();
 				}
@@ -120,89 +111,57 @@ namespace TSS
 		/// In theory there's a way better way to do this, but I'm not really sure how
 		/// TODO: I'm sure there's some bitwise shit we could do to figure this out
 		/// </summary>
-		bool CheckFailure( char type , InputBuilder input )
+		bool CheckFailure( char type )
 		{
 
 			if ( type == '0' )
 			{
 
-				if ( input.Pressed( InputButton.Right ) || input.Pressed( InputButton.Left ) || input.Pressed( InputButton.Back ) )
+				if ( Input.Pressed( "right" ) || Input.Pressed( "left" ) || Input.Pressed( "backward" ) )
 				{
 					return true;
-				}
-
-				if ( input.UsingController )
-				{
-					if ( input.Pressed( InputButton.Reload ) || input.Pressed( InputButton.Duck) || input.Pressed( InputButton.Jump ) )
-					{
-						return true;
-					}
 				}
 			}
 
 			if ( type == '1' )
 			{
-				if ( input.Pressed( InputButton.Right ) || input.Pressed( InputButton.Left ) || input.Pressed( InputButton.Forward ) )
+				if ( Input.Pressed( "right" ) || Input.Pressed( "left" ) || Input.Pressed( "forward" ) )
 				{
 					return true;
-				}
-
-				if ( input.UsingController )
-				{
-					if ( input.Pressed( InputButton.Reload ) || input.Pressed( InputButton.Duck ) || input.Pressed( InputButton.Use ) )
-					{
-						return true;
-					}
 				}
 			}
 
 			if ( type == '2' )
 			{
-				if ( input.Pressed( InputButton.Back ) || input.Pressed( InputButton.Left ) || input.Pressed( InputButton.Forward ) )
+				if ( Input.Pressed( "backward" ) || Input.Pressed( "left" ) || Input.Pressed( "forward" ) )
 				{
 					return true;
-				}
-
-				if ( input.UsingController )
-				{
-					if ( input.Pressed( InputButton.Reload ) || input.Pressed( InputButton.Use ) || input.Pressed( InputButton.Jump ) )
-					{
-						return true;
-					}
 				}
 			}
 
 			if ( type == '3' )
 			{
-				if ( input.Pressed( InputButton.Back ) || input.Pressed( InputButton.Right ) || input.Pressed( InputButton.Forward ) )
+				if ( Input.Pressed( "backward" ) || Input.Pressed( "right" ) || Input.Pressed( "forward" ) )
 				{
 					return true;
-				}
-
-				if ( input.UsingController )
-				{
-					if ( input.Pressed( InputButton.Use ) || input.Pressed( InputButton.Duck ) || input.Pressed( InputButton.Jump ) )
-					{
-						return true;
-					}
 				}
 			}
 
 			return false;
 		}
 
-		public bool CheckType( char c , InputBuilder input )
+		public bool CheckType( char c )
 		{
 			switch ( c )
 			{
 				case '0':
-					return input.UsingController ? input.Pressed(InputButton.Use) : input.Pressed( InputButton.Forward );
+					return Input.Pressed( "forward" );
 				case '1':
-					return input.UsingController ? input.Pressed( InputButton.Jump ) : input.Pressed( InputButton.Back ); ;
+					return Input.Pressed( "backward" );
 				case '2':
-					return input.UsingController ? input.Pressed( InputButton.Duck ) : input.Pressed( InputButton.Right ); ;
+					return Input.Pressed( "right" );
 				case '3':
-					return input.UsingController ? input.Pressed( InputButton.Reload ) : input.Pressed( InputButton.Left ); ;
+					return Input.Pressed( "left" );
 			}
 			return false;
 		}

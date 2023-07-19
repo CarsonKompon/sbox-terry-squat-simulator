@@ -28,7 +28,7 @@ namespace TSS.UI
 			Play = p.Add.Label( "> PLAY", "text" );
 			date = p.Add.Label( "OOO", "date" );
 			Terry = AddChild<TerryRenderScene>("scene");
-			Click = Add.Label( $"Press {Input.GetKeyWithBinding( "+iv_attack" )} to begin.", "prompt" );
+			Click = Add.Label( $"Press { Input.GetButtonOrigin( "attack1" ) } to begin.", "prompt" );
 
 		}
 
@@ -41,7 +41,7 @@ namespace TSS.UI
 				TimeSinceIntroStarted = 0f;
 			}
 
-			if ( Input.Pressed( InputButton.PrimaryAttack ) )
+			if ( Input.Pressed( "attack1" ) )
 			{
 				Click.Delete( true );
 			}

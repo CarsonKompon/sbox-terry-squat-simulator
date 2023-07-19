@@ -12,7 +12,7 @@ namespace TSS
 {
 	public partial class ExerciseComponent : EntityComponent<TSSPlayer>
 	{
-		public virtual void Simulate( Client client ) { }
+		public virtual void Simulate( IClient client ) { }
 		public virtual void Initialize() { }
 		public virtual void Cleanup() { }
 

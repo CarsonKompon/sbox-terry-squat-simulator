@@ -40,7 +40,7 @@ namespace TSS.UI
 		public override void Tick()
 		{
 			base.Tick();
-			if ( Local.Pawn is TSSPlayer p )
+			if ( Game.LocalPawn is TSSPlayer p )
 			{
 				
 				if ( !p.IntroPlayed || p.TimeSinceIntro < 25f  || p.EndingInitiated || p.ExercisePoints < 50f)
@@ -67,7 +67,7 @@ namespace TSS.UI
 				}
 			}
 
-			if ( Local.Pawn is BuffPawn b )
+			if ( Game.LocalPawn is BuffPawn b )
 			{
 				Container.SetClass( "inactive", true );
 			}

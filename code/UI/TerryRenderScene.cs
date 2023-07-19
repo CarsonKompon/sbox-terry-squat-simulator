@@ -70,7 +70,7 @@ namespace TSS.UI
 
 			Spot = new SceneSpotLight(world, (Vector3.Up * 100f) + Vector3.Forward * 20f, Color.White );
 			Spot.Rotation = Rotation.LookAt( Terry.Position - Spot.Position );
-			Spot.Falloff = 0f;
+			Spot.FallOff = 0f;
 
 			scene = Add.ScenePanel( world, CamPos, Rotation.From( CamAngles ), 45 );
 			scene.Style.Width = Length.Fraction( 1f );
@@ -87,12 +87,12 @@ namespace TSS.UI
 		public override void Tick()
 		{
 			base.Tick();
-			CamPos = Vector3.Up * 48f + CamAngles.Direction * -CamDistance;
+			CamPos = Vector3.Up * 48f + CamAngles.Forward * -CamDistance;
 			CamAngles = new( 0.0f, 180.0f, 0.0f );
 			CamDistance = 300f;
 
-			scene.CameraPosition = CamPos;
-			scene.CameraRotation = Rotation.From( CamAngles );
+			scene.Camera.Position = CamPos;
+			scene.Camera.Rotation = Rotation.From( CamAngles );
 
 			Spot.LightColor = Color.Black;
 			if (TimeSinceIntroStarted > 3f )

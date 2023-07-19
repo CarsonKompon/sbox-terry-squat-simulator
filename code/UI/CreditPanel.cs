@@ -55,7 +55,7 @@ namespace TSS.UI
 
 			Bump = Bump.LerpTo( 1f, Time.Delta * 8f );
 
-			if(Local.Pawn is TSSPlayer player )
+			if(Game.LocalPawn is TSSPlayer player )
 			{
 				if ( player.CanGoToHeaven )
 				{
@@ -68,7 +68,7 @@ namespace TSS.UI
 
 			if ( FloatUp )
 			{
-				if(Local.Pawn is TSSPlayer pl )
+				if(Game.LocalPawn is TSSPlayer pl )
 				{
 					Position = pl.ExercisePosition + pl.Rotation.Forward * -300f + Vector3.Up * offset + pl.Rotation.Right * 100f;
 					Rotation = pl.Rotation;

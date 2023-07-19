@@ -108,21 +108,25 @@ namespace TSS.UI
 		public string CreditsString()
 		{
 			string credits = "TERRY\nSQUAT\nSIMULATOR\n\n\n";
-			credits += "Programming\nJosh Wilson\nJac0xb\nTaek\nDoctor Gurke\n\n\nArt\nKabubu\n\n\nLevel Design\nGmo Man\n\nSound\nDawdle\nMungus\nJac0xb\n\n\nAnimation\nWhimsicalVR\nJosh Wilson\n\n\n";
+			credits += "Programming\nJosh Wilson\nJac0xb\nTaek\nDoctor Gurke\nCarson Kompon\n\n\n";
+			credits += "Art\nKabubu\n\n\n";
+			credits += "Level Design\nGmo Man\n\n";
+			credits += "Sound\nDawdle\nMungus\nJac0xb\n\n\n";
+			credits += "Animation\nWhimsicalVR\nJosh Wilson\n\n\n";
+			credits += "Voice Acting\nMungus\nNavia Shetty\nPhar0\nGvarados\n\n\n";
+			credits += "Sounds Provided\nFrom Freesound.Org\nInspectorJ";
 			return credits;
 		}
 
 		public override void OnHotloaded()
 		{
 			base.OnHotloaded();
-
-			
 		}
 
 		public override void Tick()
 		{
 			base.Tick();
-			if(Local.Pawn is TSSPlayer player )
+			if(Game.LocalPawn is TSSPlayer player )
 			{
 				float a = Alph;
 				Color c = Color.White;
@@ -202,9 +206,6 @@ namespace TSS.UI
 					{
 						ConsoleSystem.Run( "credits" );
 						CreditsStarted = true;
-						Credits = Add.Label( "TEST", "credits" );
-						Credits.Text = CreditsString();
-						Credits.Add.Label( "Voice Acting\nMungus\nNavia Shetty\nPhar0\nGvarados\n\n\nSounds Provided\nFrom Freesound.Org\nInspectorJ", "subcredits" );
 
 					}
 					f = 1f - ((TimeSinceEnded - 2f) / 5f);

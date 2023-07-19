@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Sandbox;
 using Sandbox.UI;
+using Sandbox.Utility;
 using TSS;
 using Sandbox.UI.Construct;
 /// <summary>
@@ -26,6 +27,7 @@ public class TwitchChatEntry : Panel
 		Name = Add.Label( "NAME", "name" );
 		Msg = Add.Label( "Message", "msg" );
 
+		Random Rand = new Random();
 		pos = new Vector2( Rand.Float( padding, Screen.Width - padding ), Rand.Float( padding, Screen.Height - padding ) );
 	}
 

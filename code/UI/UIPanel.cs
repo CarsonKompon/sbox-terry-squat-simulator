@@ -19,19 +19,8 @@ namespace TSS.UI
 		public override void Tick()
 		{
 			base.Tick();
-			if ( Local.Pawn is TSSPlayer p )
-			{
-				if ( p.CameraMode is DevCamera )
-				{
-					SetClass( "inactive", true );
-				}
-				else
-				{
-					SetClass( "inactive", false );
-				}
-			}
 
-			if(Local.Pawn is BuffPawn b )
+			if(Game.LocalPawn is BuffPawn b )
 			{
 				SetClass( "inactive", true );
 			}

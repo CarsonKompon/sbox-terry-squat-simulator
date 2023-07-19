@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 using TSS.UI;
 using System.Linq;
 
@@ -42,49 +43,50 @@ namespace TSS
 			base.ClientSpawn();
 			TimeSinceSpawned = 0f;
 
+			Random Rand = new Random();
 			Panel = new PunchQTPanel( this, new Vector2( Rand.Float( -20f, 20f ), Rand.Float( -20f, 20f ) ) );
 			switch ( Type )
 			{
 				case 0:
-					Panel.Key.Text = Input.GetKeyWithBinding( "+iv_forward" ).ToUpper();
+					Panel.Key.Text = Input.GetButtonOrigin( "forward" ).ToUpper();
 					break;
 				case 1:
-					Panel.Key.Text = Input.GetKeyWithBinding( "+iv_back" ).ToUpper();
+					Panel.Key.Text = Input.GetButtonOrigin( "backward" ).ToUpper();
 					break;
 				case 2:
-					Panel.Key.Text = Input.GetKeyWithBinding( "+iv_left" ).ToUpper();
+					Panel.Key.Text = Input.GetButtonOrigin( "left" ).ToUpper();
 					break;
 				case 3:
-					Panel.Key.Text = Input.GetKeyWithBinding( "+iv_right" ).ToUpper();
+					Panel.Key.Text = Input.GetButtonOrigin( "right" ).ToUpper();
 					break;
 			}
 			MyTime = ((60f / 140f) * 2f);
 		}
 
-		[Event.BuildInput]
-		public void BuildPunchInput( InputBuilder input )
+		[GameEvent.Client.BuildInput]
+		public void BuildPunchInput( )
 		{
 			bool pressed = false;
 			if ( Type == 0 )
 			{
-				pressed = Input.Pressed( InputButton.Forward );
+				pressed = Input.Pressed( "forward" );
 			}
 			if ( Type == 1 )
 			{
-				pressed = Input.Pressed( InputButton.Back );
+				pressed = Input.Pressed( "backward" );
 			}
 			if ( Type == 2 )
 			{
-				pressed = Input.Pressed( InputButton.Left );
+				pressed = Input.Pressed( "left" );
 			}
 			if ( Type == 3 )
 			{
-				pressed = Input.Pressed( InputButton.Right );
+				pressed = Input.Pressed( "right" );
 			}
 
 			if ( TimeSinceSpawned < MyTime - 0.15f )
 			{
-				if ( Input.Pressed( InputButton.Forward ) || Input.Pressed( InputButton.Back ) || Input.Pressed( InputButton.Right ) || Input.Pressed( InputButton.Left ) )
+				if ( Input.Pressed( "forward" ) || Input.Pressed( "backward" ) || Input.Pressed( "left" ) || Input.Pressed( "right" ) )
 				{
 					Panel.Finished = true;
 					Panel.Failed = true;
@@ -103,7 +105,7 @@ namespace TSS
 				{
 					ConsoleSystem.Run( "Punch" );
 
-					if ( IsClient )
+					if ( Game.IsClient )
 					{
 						Panel.Finished = true;
 					}
@@ -123,7 +125,7 @@ namespace TSS
 			}
 		}
 
-		[Event.Tick]
+		[GameEvent.Tick]
 		public void Simulate()
 		{
 			if ( Player == null )
@@ -133,7 +135,7 @@ namespace TSS
 			
 			if( Player.CurrentExercise != Exercise.Punch )
 			{
-				if ( IsServer )
+				if ( Game.IsServer )
 				{
 					Delete();
 				}
@@ -146,14 +148,14 @@ namespace TSS
 
 			if ( TimeSinceSpawned > MyTime+0.15f )
 			{
-				if ( IsClient )
+				if ( Game.IsClient )
 				{
 					if ( Panel != null && !Panel.Finished )
 					{
 						Panel?.Delete( true );
 					}
 				}
-				if ( IsServer )
+				if ( Game.IsServer )
 				{
 					Delete();
 					return;

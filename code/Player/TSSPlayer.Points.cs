@@ -48,14 +48,16 @@ namespace TSS
 		[ClientRpc]
 		public void CreatePoint( int i, bool fall = false, int count = 1 )
 		{
-			if ( IsClient )
+			if ( Game.IsClient )
 			{
+				Random Rand = new Random();
+
 				for ( int j = 0; j < count; j++ )
 				{
 					var p = new ExercisePointPanel( i, ExercisePoints );
 					Vector3 pos = Position + Vector3.Up * 48f;
 
-					Vector3 dir = ((CameraMode as TSSCamera).Position - pos).Normal;
+					Vector3 dir = (Camera.Position - pos).Normal;
 					Rotation dirRand = Rotation.From( Rand.Float( -45f, 45f ), Rand.Float( -45f, 45f ), Rand.Float( -45f, 45f ) );
 					p.Position = pos + (dir * dirRand) * 28f;
 
@@ -77,7 +79,7 @@ namespace TSS
 		[ClientRpc]
 		public void CreatePointAtPosition( int i, Vector3 pos, bool fall = false, int count = 1 )
 		{
-			if ( IsClient )
+			if ( Game.IsClient )
 			{
 				for ( int j = 0; j < count; j++ )
 				{

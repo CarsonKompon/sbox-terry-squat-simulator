@@ -23,7 +23,6 @@ public partial class Soda : Food
 		return "models/soda/soda.vmdl";
 	}
 
-	[ClientRpc]
 	public override void CreatePanel()
 	{
 		FoodPan = new FoodPanel( GetPanelSize(), Color.White, "SODA", "");
@@ -32,7 +31,8 @@ public partial class Soda : Food
 
 	public override Vector3 GetInitialPosition()
 	{
-		return Player.Position + Vector3.Up * Rand.Float( 32f, 64f ) + new Angles( 0, Rand.Float( 0, 180 ), 0 ).Direction * 20f;
+		Random Rand = new Random();
+		return Player.Position + Vector3.Up * Rand.Float( 32f, 64f ) + new Angles( 0, Rand.Float( 0, 180 ), 0 ).Forward * 20f;
 	}
 
 	public override int GetClickPoints()

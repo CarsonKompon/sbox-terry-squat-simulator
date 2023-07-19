@@ -79,7 +79,7 @@ namespace TSS
 
 		public void InitializeComponenets()
 		{
-			Components.Create<SquatComponenet>();
+			Components.Create<SquatComponent>();
 			Components.Create<RunComponent>();
 			Components.Create<PunchComponent>();
 			Components.Create<YogaComponent>();
@@ -115,7 +115,7 @@ namespace TSS
 		#region Visual
 		//Creates a ragdoll
 		[ClientRpc]
-		void BecomeRagdollOnClient( Vector3 force, int forceBone )
+		public void BecomeRagdollOnClient( Vector3 force, int forceBone )
 		{
 
 			ModelEntity ent = new();
@@ -227,12 +227,10 @@ namespace TSS
 		[ClientRpc]
 		public void CreateNearEndParticle()
 		{
-			//Get the camera
-			var localCam = (CameraMode as TSSCamera);
 			//Get a position roughlt up the middle of the player
 			var pos = ExercisePosition + Vector3.Up * 45f;
 			//Get a vector representing the direction from the pos to the local cameras position
-			var dir = (pos - localCam.Position).Normal;
+			var dir = (pos - Camera.Position).Normal;
 
 			//Set the position variables of the particle and create it
 			SickoModePositionTar = pos + dir * 200f;
@@ -245,13 +243,12 @@ namespace TSS
 		/// </summary>
 		public void HandleNearEndParticle()
 		{
-			if ( IsClient )
+			if ( Game.IsClient )
 			{
 				if ( SickoMode != null )
 				{
-					var localCam = (CameraMode as TSSCamera);
 					var pos = ExercisePosition + Vector3.Up * 45f;
-					var dir = (pos - localCam.Position).Normal;
+					var dir = (pos - Camera.Position).Normal;
 					SickoModePositionTar = pos + dir * 200f;
 					SickoModePosition = Vector3.Lerp( SickoModePosition, SickoModePositionTar, Time.Delta * 8f );
 					SickoMode.SetPosition( 0, SickoModePositionTar );
@@ -309,7 +306,7 @@ namespace TSS
 		public void HandleEffectsAndAnims()
 		{
 			//For client simulated particles
-			if ( IsClient )
+			if ( Game.IsClient )
 			{
 				//Here we have a sweat value
 				float sweatValue = 150f;
@@ -349,9 +346,10 @@ namespace TSS
 		public async void CounterBump( float f )
 		{
 			await GameTask.DelaySeconds( 0.1f );
-			if ( (CameraMode as TSSCamera).SCounter != null )
+			var cam = Components.GetOrCreate<TSSCameraComponent>();
+			if ( cam.SCounter != null )
 			{
-				var c = (CameraMode as TSSCamera).SCounter;
+				var c = cam.SCounter;
 				c.TextScale += f * CurrentExerciseSpeed;
 			}
 		}
@@ -361,7 +359,7 @@ namespace TSS
 		/// </summary>
 		public void HandleCounter()
 		{
-			TSSCamera cam = (CameraMode as TSSCamera);
+			var cam = Components.GetOrCreate<TSSCameraComponent>();
 			if ( cam.SCounter != null )
 			{
 				var c = cam.SCounter;
@@ -451,7 +449,7 @@ namespace TSS
 					break;
 				case Exercise.Squat:
 					ent = All.OfType<TSSSpawn>().ToList().Find( x => x.SpawnType == SpawnType.Squat );
-					var squat = Components.GetAll<SquatComponenet>().First();
+					var squat = Components.GetAll<SquatComponent>().First();
 					squat.StartSquatting();
 					break;
 				case Exercise.Punch:
@@ -505,6 +503,7 @@ namespace TSS
 				return;
 			}
 
+			Random Rand = new Random();
 			PointCeiling = ExercisePoints + Rand.Int( 20, 50 );
 			var exercises = new Exercise[] { Exercise.Squat, Exercise.Run, Exercise.Punch, Exercise.Yoga }.Where( ( e ) => e != CurrentExercise ).ToArray();
 			ChangeExercise( exercises[Rand.Int( 0, exercises.Count() - 1 )] );

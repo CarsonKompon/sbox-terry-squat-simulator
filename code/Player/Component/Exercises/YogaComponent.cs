@@ -35,10 +35,10 @@ namespace TSS
 
 
 
-		public override void Simulate( Client client )
+		public override void Simulate( IClient client )
 		{
 			base.Simulate( client );
-			var cam = Entity.CameraMode as TSSCamera;
+			var cam = Entity.Components.GetOrCreate<TSSCameraComponent>();
 			SimulateYoga( cam );
 		}
 
@@ -51,7 +51,7 @@ namespace TSS
 		/// Simulate the yoga exercise state
 		/// </summary>
 		/// <param name="cam"></param>
-		public void SimulateYoga( TSSCamera cam )
+		public void SimulateYoga( TSSCameraComponent cam )
 		{
 			Entity.SetAnimParameter( "YogaPoses", CurrentYogaPosition );
 			Entity.SetAnimParameter( "b_grounded", CurrentYogaPosition == 0 );
@@ -65,7 +65,7 @@ namespace TSS
 			{
 				TimeSinceYoga = 0;
 
-				if ( Entity.IsClient )
+				if ( Game.LocalPawn == Entity )
 				{
 					// Prevent duplicate yoga qt panels appearing when alt-tabbed.
 					if ( Sandbox.Entity.All.OfType<YogaQT>().Count() == 0 )

@@ -3,7 +3,7 @@ using Sandbox;
 
 namespace TSS
 {
-	public partial class TSSGame : Game
+	public partial class TSSGame
 	{
 		[ConCmd.Server]
 		public static void CreateFood()

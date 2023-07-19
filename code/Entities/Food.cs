@@ -40,8 +40,7 @@ public partial class Food : ModelEntity {
 		Position = GetInitialPosition();
 		Transmit = TransmitType.Always;
 		SetupPhysicsFromSphere( PhysicsMotionType.Keyframed, Vector3.Zero + Vector3.Up * 2.5f, 5f );
-		SetInteractsAs( CollisionLayer.Player);
-		CollisionGroup = CollisionGroup.Player;
+		Tags.Add( "player" );
 		EnableTouch = true;
 
 		MoveToPlayer = true;
@@ -56,8 +55,7 @@ public partial class Food : ModelEntity {
 	}
 
 	public FoodPanel FoodPan;
-
-	[ClientRpc]
+	
 	public virtual void CreatePanel()
 	{
 		FoodPan = new FoodPanel( GetPanelSize(), Color.White, "FOOD", GetClickPoints().ToString() );
@@ -81,6 +79,7 @@ public partial class Food : ModelEntity {
 
 	public virtual Vector3 GetInitialPosition()
 	{
+		Random Rand = new Random();
 		return Player.Position +
 			Player.Rotation.Forward * 256 +
 			Player.Rotation.Down * Rand.Int( -64, 64 ) +
@@ -99,17 +98,16 @@ public partial class Food : ModelEntity {
 			}
 			RemoveModel();
 			FoodModel = null;
-			if ( IsServer ){ Delete(); }
+			if ( Game.IsServer ){ Delete(); }
 		}
 	}
 
 	public override void ClientSpawn()
 	{
 		base.ClientSpawn();
-		FoodModel = new SceneObject(Map.Scene, Model.Load( GetFoodModel()), Transform);
+		FoodModel = new SceneObject(Game.SceneWorld, Model.Load( GetFoodModel()), Transform);
 	}
 
-	[ClientRpc]
 	public void RemoveModel()
 	{
 		FoodModel.Delete();
@@ -133,25 +131,22 @@ public partial class Food : ModelEntity {
 
 	}
 
-	[Event.Tick]
-	public virtual void Simulate()
+	[GameEvent.Tick.Server]
+	public void TickServer()
 	{
-		if ( IsServer )
-		{
-			if ( MoveToPlayer ) {
-				Vector3 dir = (Player.Position + Vector3.Up * 48f - Position).Normal;
-				Position += dir * 0.5f;
-			}
+		if ( MoveToPlayer ) {
+			Vector3 dir = (Player.Position + Vector3.Up * 48f - Position).Normal;
+			Position += dir * 0.5f;
+		}
 
-			if(TimeSinceSpawned > Life )
-			{
-				RemoveModel();
-				Delete();
-			}
+		if(TimeSinceSpawned > Life )
+		{
+			RemoveModel();
+			Delete();
 		}
 	}
 
-	[Event.Frame]
+	[GameEvent.Client.Frame]
 	public virtual void Frame()
 	{
 		if ( !FoodModel.IsValid() )

@@ -1,24 +1,26 @@
 ﻿
 using Sandbox;
+using Sandbox.PostProcess;
 using System.Linq;
 
 namespace TSS
 {
-	public partial class TSSGame : Game
+	public partial class TSSGame : GameManager
 	{
 		public TSSGame()
 		{
-			if ( IsServer )
+			if ( Game.IsServer )
 			{
 				_ = new TSSHud();
 				DequeueLoop();
 			}
 
-			if ( IsClient )
+			if ( Game.IsClient )
 			{
-				PostProcess.Add( new VHSPostProcess() );
-				var vhsInvert = PostProcess.Get<VHSPostProcess>();
-				vhsInvert.Enabled = true;
+				// PAINDAY TODO: Re-implement this
+				// PostProcess.Add( new VHSPostProcess() );
+				// var vhsInvert = PostProcess.Get<VHSPostProcess>();
+				// vhsInvert.Enabled = true;
 			}
 		}
 
@@ -27,15 +29,9 @@ namespace TSS
 			//Do nothing
 		}
 
-		public override void ClientJoined( Client client )
+		public override void ClientJoined( IClient client )
 		{
 			base.ClientJoined( client );
-
-			// Kick anyone who isn't host.
-			if ( !client.IsListenServerHost )
-			{
-				client.Kick();
-			}
 
 			var player = new TSSPlayer();
 			client.Pawn = player;
@@ -43,7 +39,7 @@ namespace TSS
 		}
 
 		// Helper field that casts game.
-		public static new TSSGame Current => Game.Current as TSSGame;
+		public static new TSSGame Current => GameManager.Current as TSSGame;
 
 		// Get the player, there should only be one.
 		public static TSSPlayer Pawn => All.OfType<TSSPlayer>().First();

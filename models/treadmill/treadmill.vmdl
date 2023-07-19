@@ -51,10 +51,6 @@
 								from = "treadmill_track.vmat"
 								to = "models/treadmill/textures/treadmill_belt.vmat"
 							},
-							{
-								from = ""
-								to = "models/treadmill/textures/treadmill_body.vmat"
-							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -84,7 +80,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -14.159707, 0.062426, 1.277319 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 49.948711, 24.686512, 5.529355 ]
@@ -93,7 +89,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -33.387009, -0.393363, 4.511125 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 11.49411, 23.774937, 3.373565 ]
@@ -102,7 +98,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -38.742203, -0.251231, 20.316414 ]
 						angles = [ 28.987112, 0.0, 0.0 ]
 						dimensions = [ 16.109344, 26.447027, 3.145789 ]
@@ -111,7 +107,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -24.074877, 10.315552, 17.217834 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 17.44836, 2.357105, 3.444657 ]
@@ -120,7 +116,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -23.889854, -10.42572, 17.419573 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 18.170891, 2.357105, 3.131812 ]
@@ -129,7 +125,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -35.736271, -11.608762, 9.571913 ]
 						angles = [ 19.351044, 0.0, 0.0 ]
 						dimensions = [ 2.107155, 1.344139, 15.395558 ]
@@ -138,7 +134,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -35.838505, 11.626586, 9.280829 ]
 						angles = [ 19.351044, 0.0, 0.0 ]
 						dimensions = [ 2.107155, 1.344139, 14.778543 ]
@@ -147,7 +143,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -31.801857, 10.010898, 17.543949 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 5.462719, 8.708853, 3.373565 ]
@@ -156,7 +152,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -32.012199, -10.336398, 17.811411 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 5.462719, 9.519838, 3.373565 ]
@@ -165,7 +161,7 @@
 						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						origin = [ -32.457253, -0.139818, 18.085947 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 4.328401, 11.613793, 2.460919 ]
@@ -242,5 +238,6 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 	}
 }

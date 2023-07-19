@@ -4148,7 +4148,7 @@
 										hidden = false
 										anim_markup_ordered = false
 										disable_compression = false
-										source_filename = "models/citizen/animations/weapons/Citizen@Pistol_2H_Pose_Moving_01.fbx"
+										source_filename = "models/citizen/animations/weapons/citizen@pistol_2h_pose_standing_moving_01.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -4368,7 +4368,7 @@
 										hidden = false
 										anim_markup_ordered = false
 										disable_compression = false
-										source_filename = "models/citizen/animations/weapons/Citizen@Pistol_RH_Pose_Moving_01.fbx"
+										source_filename = "models/citizen/animations/weapons/citizen@shotgun_2h_pose_standing_moving_01.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -4807,7 +4807,7 @@
 										hidden = false
 										anim_markup_ordered = false
 										disable_compression = false
-										source_filename = "models/citizen/animations/weapons/Citizen@Shotgun_2H_Pose_Moving_01.fbx"
+										source_filename = "models/citizen/animations/weapons/citizen@shotgun_2h_pose_standing_moving_01.fbx"
 										start_frame = -1
 										end_frame = -1
 										framerate = -1.0
@@ -7627,7 +7627,7 @@
 								parent_bone = "pelvis"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 3
+								tags = ""
 								radius = 4.5
 								point0 = [ 0.5, 0.0, -2.5 ]
 								point1 = [ 0.5, 0.0, 2.5 ]
@@ -7638,7 +7638,7 @@
 								parent_bone = "spine_0"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 3
+								tags = ""
 								radius = 6.5
 								point0 = [ 0.0, 0.0, -1.0 ]
 								point1 = [ 0.0, 0.0, 1.0 ]
@@ -7649,7 +7649,7 @@
 								parent_bone = "spine_1"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 2
+								tags = ""
 								radius = 7.0
 								point0 = [ 0.0, 0.0, -0.5 ]
 								point1 = [ 0.0, 0.0, 0.5 ]
@@ -7660,7 +7660,7 @@
 								parent_bone = "spine_2"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 2
+								tags = ""
 								radius = 7.0
 								point0 = [ -1.0, 0.0, 0.0 ]
 								point1 = [ 1.0, 0.0, 0.0 ]
@@ -7671,7 +7671,7 @@
 								parent_bone = "neck_0"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 2
+								tags = ""
 								radius = 2.0
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 2.0, 0.0, 0.0 ]
@@ -7682,7 +7682,7 @@
 								parent_bone = "head"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 1
+								tags = ""
 								radius = 6.2
 								point0 = [ 0.0, 0.5, 0.0 ]
 								point1 = [ 9.0, 0.3, 0.0 ]
@@ -7693,7 +7693,7 @@
 								parent_bone = "clavicle_R"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 5
+								tags = ""
 								radius = 2.5
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 4.5, 0.0, 0.0 ]
@@ -7704,7 +7704,7 @@
 								parent_bone = "arm_upper_R"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 5
+								tags = ""
 								radius = 2.5
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 10.0, 0.0, 0.0 ]
@@ -7715,7 +7715,7 @@
 								parent_bone = "arm_lower_R"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 5
+								tags = ""
 								radius = 2.2
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 9.0, -0.5, -0.5 ]
@@ -7726,7 +7726,7 @@
 								parent_bone = "hand_R"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 5
+								tags = ""
 								radius = 2.0
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 2.0, 0.0, 0.0 ]
@@ -7737,7 +7737,7 @@
 								parent_bone = "clavicle_L"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 4
+								tags = ""
 								radius = 2.5
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 4.5, 0.0, 0.0 ]
@@ -7748,7 +7748,7 @@
 								parent_bone = "arm_upper_L"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 4
+								tags = ""
 								radius = 2.5
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 10.0, 0.0, 0.0 ]
@@ -7759,7 +7759,7 @@
 								parent_bone = "arm_lower_L"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 4
+								tags = ""
 								radius = 2.2
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 9.0, -0.5, 0.5 ]
@@ -7770,7 +7770,7 @@
 								parent_bone = "hand_L"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 4
+								tags = ""
 								radius = 2.0
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 2.0, 0.0, 0.0 ]
@@ -7781,7 +7781,7 @@
 								parent_bone = "leg_upper_R"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 7
+								tags = ""
 								radius = 3.0
 								point0 = [ 1.0, 0.0, 0.0 ]
 								point1 = [ 13.0, 0.0, 0.0 ]
@@ -7792,7 +7792,7 @@
 								parent_bone = "leg_lower_R"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 7
+								tags = ""
 								radius = 2.4
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 13.0, 0.0, 0.0 ]
@@ -7803,7 +7803,7 @@
 								parent_bone = "ankle_R"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 7
+								tags = ""
 								radius = 2.5
 								point0 = [ 2.0, -1.6, 0.0 ]
 								point1 = [ 4.5, 0.85, 0.0 ]
@@ -7814,7 +7814,7 @@
 								parent_bone = "leg_upper_L"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 6
+								tags = ""
 								radius = 3.0
 								point0 = [ 1.0, 0.0, 0.0 ]
 								point1 = [ 13.0, 0.0, 0.0 ]
@@ -7825,7 +7825,7 @@
 								parent_bone = "leg_lower_L"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 6
+								tags = ""
 								radius = 2.4
 								point0 = [ 0.0, 0.0, 0.0 ]
 								point1 = [ 13.0, 0.0, 0.0 ]
@@ -7836,7 +7836,7 @@
 								parent_bone = "ankle_L"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 6
+								tags = ""
 								radius = 2.5
 								point0 = [ 2.0, -1.6, 0.0 ]
 								point1 = [ 4.5, 0.85, 0.0 ]

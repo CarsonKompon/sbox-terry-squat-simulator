@@ -79,6 +79,12 @@ namespace TSS
 		/// but Terry scales with this value, make him appear to bump when he recieves points.
 		/// </summary>
 		public float ScaleTar;
+		
+		/// <summary>
+		/// The animator component used to animate terry
+		/// </summary
+		[BindComponent]
+		public TSSPlayerAnimatorComponent Animator { get; }
 
 		/// <summary>
 		/// The time since the player has last been ragdolled. 
@@ -160,12 +166,9 @@ namespace TSS
 		#region Overrides
 		public override void CreateHull()
 		{
-			//Set up collisions for the player
-			CollisionGroup = CollisionGroup.Player;
-			AddCollisionLayer( CollisionLayer.Player );
+			//Set up collisions for the player;
 			SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, new Vector3( -8, -8, 0 ), new Vector3( 8, 8, 72 ) );
 
-			MoveType = MoveType.MOVETYPE_WALK;
 			EnableHitboxes = true;
 		}
 
@@ -190,13 +193,15 @@ namespace TSS
 				SetModel( "models/terry_buff/terry_buff.vmdl" );
 			}
 
-			Animator = new TSSPlayerAnimator();
-			CameraMode = new TSSCamera();
-			(CameraMode as TSSCamera).SkipIntro = SkipIntro;
+			Components.Create<TSSPlayerAnimatorComponent>();
+			var cam = Components.Create<TSSCameraComponent>();
+			Components.Add(cam);
+			
+			cam.SkipIntro = SkipIntro;
 
 			//Set the initial exercise to squat
 			ChangeExercise( Exercise.Squat );
-			CurrentExerciseComponent = Components.GetAll<SquatComponenet>().First();
+			CurrentExerciseComponent = Components.GetAll<SquatComponent>().First();
 
 			//Set this to 4 seconds so that the camera already starts 'stopped'
 			TimeSinceExerciseStopped = 4f;
@@ -254,12 +259,12 @@ namespace TSS
 			base.Spawn();
 		}
 
-		public override void Simulate( Client cl )
+		public override void Simulate( IClient cl )
 		{
 			base.Simulate( cl );
 
 			//This will play the intro once you press the left click
-			if ( !IntroPlayed && Input.Pressed( InputButton.PrimaryAttack ) && TimeSinceRagdolled > 12f && !SkipIntro )
+			if ( !IntroPlayed && Input.Pressed( "attack1" ) && !SkipIntro )
 			{
 				TimeSinceIntro = 0f;
 				IntroPlayed = true;
@@ -272,7 +277,7 @@ namespace TSS
 				return;
 			}
 
-			var squat = Components.GetAll<SquatComponenet>().First();
+			var squat = Components.GetAll<SquatComponent>().First();
 
 
 			//Determine if we need to move to the ending or not
@@ -284,14 +289,14 @@ namespace TSS
 				return;
 			}
 
-			//Handle clicking on food
-			DetectClick();
+			if(Game.IsClient)
+			{
+				//Handle clicking on food
+				DetectClick();
+			}
 
 			//Handles visual effects like the sweating and white void particle
 			HandleEffectsAndAnims();
-
-			//Get a reference to the camera
-			TSSCamera cam = (CameraMode as TSSCamera);
 
 			//Simulate our current exercise
 			Components.GetAll<ExerciseComponent>().Where( x => x.ExerciseType == CurrentExercise ).First().Simulate(cl);
@@ -312,6 +317,8 @@ namespace TSS
 			//Handles the score counter behind the player
 			HandleCounter();
 
+			Animator?.Simulate( cl );
+
 			SimulateActiveChild( cl, ActiveChild );
 		}
 		#endregion
@@ -324,9 +331,9 @@ namespace TSS
 		{
 			await GameTask.Delay( 1000 );
 
+			Log.Info("Playing the music");
 			TSSGame.Current.StartMusic();
 			TSSGame.Current.PlayIntro();
-
 		}
 
 		/// <summary>
@@ -360,7 +367,7 @@ namespace TSS
 		/// </summary>
 		public void StartEnding()
 		{
-			var squat = Components.GetAll<SquatComponenet>().First();
+			var squat = Components.GetAll<SquatComponent>().First();
 			//Delete the barbell
 			if ( squat.Barbell.IsValid() )
 			{
@@ -384,13 +391,16 @@ namespace TSS
 		/// </summary>
 		public void DetectClick()
 		{
-			if ( Input.Pressed( InputButton.PrimaryAttack ) )
+			if ( Input.Pressed( "attack1" ) )
 			{
-				TraceResult clickTrace = Trace.Ray( Input.Cursor, 1000f ).HitLayer( CollisionLayer.All, true ).WithoutTags("wall").Run();
+				var mouseRay = new Ray(Camera.Position, Screen.GetDirection(Mouse.Position));
+				TraceResult clickTrace = Trace.Ray( mouseRay, 1000f )
+					.WithoutTags( "wall" )
+					.Run();
 
 				if ( clickTrace.Hit )
 				{
-					if ( IsServer && clickTrace.Entity is Food food )
+					if ( Game.IsServer && clickTrace.Entity is Food food )
 					{
 						food.Click();
 					}
@@ -425,7 +435,7 @@ namespace TSS
 		/// </summary>
 		public void DrinkSoda()
 		{
-			var squat = Components.GetAll<SquatComponenet>().First();
+			var squat = Components.GetAll<SquatComponent>().First();
 			
 			//Disable drawing the barbell
 			if ( squat.Barbell.IsValid() )
@@ -452,7 +462,7 @@ namespace TSS
 		/// </summary>
 		private void EvaluateSodaAnim()
 		{
-			var squat = Components.GetAll<SquatComponenet>().First();
+			var squat = Components.GetAll<SquatComponent>().First();
 
 			if ( TimeSinceSoda > 1.7f )
 			{
@@ -477,7 +487,7 @@ namespace TSS
 			if ( TimeSinceEnding > 13.278f && EndingInitiated )
 			{
 				StartEndingTransition();
-				if ( IsServer )
+				if ( Game.IsServer )
 				{
 					var pl = new BuffPawn();
 					Client.Pawn = pl;
@@ -541,6 +551,7 @@ namespace TSS
 			//Basically once our exercise points are above a certain point ceiling, switch randomly to other gamemodes.
 			if ( ExercisePoints >= PointCeiling )
 			{
+				Random Rand = new Random();
 				PointCeiling = ExercisePoints + Rand.Int( 20, 50 );
 				var exercises = new Exercise[] { Exercise.Squat, Exercise.Run, Exercise.Punch, Exercise.Yoga }.Where( ( e ) => e != CurrentExercise ).ToArray();
 				ChangeExercise( exercises[Rand.Int( 0, exercises.Count() - 1 )] );
@@ -556,9 +567,9 @@ namespace TSS
 
 		#endregion
 
-		public override void FrameSimulate( Client cl )
+		public override void FrameSimulate( IClient cl )
 		{
-			if ( IsClient && titleCardActive )
+			if ( Game.IsClient && titleCardActive )
 			{
 				titleCard ??= new UI.CreditPanel( CurrentExercise.ToString().ToUpper(), 3200, 3200 )
 				{

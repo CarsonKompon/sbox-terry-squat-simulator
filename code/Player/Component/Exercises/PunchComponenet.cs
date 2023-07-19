@@ -49,11 +49,10 @@ namespace TSS
 		}
 
 
-		public override void Simulate( Client client )
+		public override void Simulate( IClient client )
 		{
 			base.Simulate( client );
-			var cam = Entity.CameraMode as TSSCamera;
-			SimulatePunching( cam );
+			SimulatePunching();
 		}
 
 		public override void Cleanup()
@@ -63,14 +62,8 @@ namespace TSS
 		/// <summary>
 		/// The punching exercise
 		/// </summary>
-		/// <param name="cam"></param>
-		public void SimulatePunching( TSSCamera cam )
+		public void SimulatePunching()
 		{
-			if ( cam == null )
-			{
-				return;
-			}
-
 			Entity.SetAnimParameter( "punch", Squat );
 
 			if ( TimeSincePunch > TimeToNextPunch )

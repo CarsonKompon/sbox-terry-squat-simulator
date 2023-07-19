@@ -21,7 +21,8 @@ public partial class FrenchFries : Food {
 
 	public override Vector3 GetInitialPosition()
 	{
-		return Player.EyePosition + new Angles( 0, Rand.Float( 0, 360 ), 0 ).Direction * 256f;
+		Random Rand = new Random();
+		return Player.EyePosition + new Angles( 0, Rand.Float( 0, 360 ), 0 ).Forward * 256f;
 	}
 
 	public override int GetClickPoints()
@@ -29,7 +30,6 @@ public partial class FrenchFries : Food {
 		return 5;
 	}
 
-	[ClientRpc]
 	public override void CreatePanel()
 	{
 		FoodPan = new FoodPanel( GetPanelSize(), Color.White, "FRIES", "-10" );

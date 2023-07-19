@@ -27,12 +27,10 @@ namespace TSS.UI
 		{
 			base.Tick();
 
-			if ( Local.Pawn is TSSPlayer p )
+			if ( Game.LocalPawn is TSSPlayer p )
 			{
-				if ( p.CameraMode is TSSCamera c )
-				{
-					Rotation = Rotation.LookAt( (Position - c.Position) * -1f, Vector3.Up );
-				}
+				Rotation = Rotation.LookAt( (Position - Camera.Position) * -1f, Vector3.Up );
+				
 			}
 
 		}

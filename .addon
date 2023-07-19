@@ -3,20 +3,138 @@
   "Type": "game",
   "Org": "eagleone",
   "Ident": "tss",
+  "Tags": null,
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
-  "ResourcePaths": [
-    "fonts/*",
-    "materials/ui/*"
-  ],
+  "Resources": null,
+  "MenuResources": null,
   "HasCode": true,
   "CodePath": "code",
-  "RootNamespace": "Sandbox",
+  "PackageReferences": [],
+  "EditorReferences": null,
   "Metadata": {
     "MapList": [
       "eagleone.gym"
     ],
-    "MapSelect": 1
+    "MapSelect": 1,
+    "MinPlayers": 16,
+    "MaxPlayers": 16,
+    "TickRate": 50,
+    "GameNetworkType": "Multiplayer",
+    "CsProjName": "",
+    "LaunchConfigs": [
+      {
+        "Name": "My New Config",
+        "GameIdent": "eagleone.tss#local",
+        "MapName": "eagleone.gym",
+        "MaxPlayers": 1,
+        "GameSettings": {},
+        "Addons": "",
+        "PreLaunchCommand": "",
+        "PostLaunchCommand": ""
+      }
+    ],
+    "ControlModes": {},
+    "InputSettings": {
+      "Actions": [
+        {
+          "Name": "Forward",
+          "KeyboardCode": "W",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Backward",
+          "KeyboardCode": "S",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Left",
+          "KeyboardCode": "A",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Right",
+          "KeyboardCode": "D",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Jump",
+          "KeyboardCode": "space",
+          "GamepadCode": "A",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Run",
+          "KeyboardCode": "shift",
+          "GamepadCode": "LeftJoystickButton",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Walk",
+          "KeyboardCode": "alt",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Duck",
+          "KeyboardCode": "ctrl",
+          "GamepadCode": "B",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "attack1",
+          "KeyboardCode": "mouse1",
+          "GamepadCode": "RightTrigger",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "attack2",
+          "KeyboardCode": "mouse2",
+          "GamepadCode": "LeftTrigger",
+          "GroupName": "Actions"
+        },
+        {
+          "Name": "View",
+          "KeyboardCode": "C",
+          "GamepadCode": "RightJoystickButton",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Voice",
+          "KeyboardCode": "v",
+          "GamepadCode": "RightJoystickButton",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Drop",
+          "KeyboardCode": "g",
+          "GamepadCode": "RightJoystickButton",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Flashlight",
+          "KeyboardCode": "f",
+          "GamepadCode": "DpadNorth",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Score",
+          "KeyboardCode": "tab",
+          "GamepadCode": "SwitchLeftMenu",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Menu",
+          "KeyboardCode": "Q",
+          "GamepadCode": "SwitchRightMenu",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Chat",
+          "KeyboardCode": "enter",
+          "GroupName": "Other"
+        }
+      ]
+    }
   }
 }

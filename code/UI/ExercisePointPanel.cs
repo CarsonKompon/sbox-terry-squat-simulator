@@ -42,6 +42,8 @@ namespace TSS.UI
 
 		public ExercisePointPanel( int points, int totalPoints )
 		{
+			Random Rand = new Random();
+
 			Opacity = 1f;
 			Fall = false;
 			Life = Rand.Float( 1, 2f );
@@ -66,7 +68,7 @@ namespace TSS.UI
 		{
 			base.Tick();
 
-			if ( Local.Pawn is TSSPlayer pl )
+			if ( Game.LocalPawn is TSSPlayer pl )
 			{
 				if ( pl.CanGoToHeaven )
 				{
@@ -103,10 +105,9 @@ namespace TSS.UI
 			}
 			FontSize = 75f;
 
-			if ( Local.Pawn is TSSPlayer player )
+			if ( Game.LocalPawn is TSSPlayer player )
 			{
-				var cam = player.CameraMode as TSSCamera;
-				Rotation = Rotation.LookAt( (cam.Position - Position) );
+				Rotation = Rotation.LookAt( (Camera.Position - Position) );
 			}
 
 		}

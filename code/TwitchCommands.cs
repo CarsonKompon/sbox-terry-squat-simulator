@@ -57,7 +57,7 @@ namespace Twitch.Commands
 			{
 				var f = TypeLibrary.Create<Entity>( FoodItem );
 				TimeSinceEaten = 0f;
-				TSSGame.Current.AddHudMessage( (f as Food).Description , msg.DisplayName, msg.Color );
+				TSSGame.AddHudMessage( (f as Food).Description , msg.DisplayName, msg.Color );
 			}
 		}
 	}
@@ -77,7 +77,7 @@ namespace Twitch.Commands
 			if( TimeSinceExerciseLastChanged > 10f && Pl.ExercisePoints > 400f)
 			{
 				Event.Run( "rand_exercise" );
-				TSSGame.Current.AddHudMessage( "shakes things up!", msg.DisplayName, msg.Color );
+				TSSGame.AddHudMessage( "shakes things up!", msg.DisplayName, msg.Color );
 				TimeSinceExerciseLastChanged = 0f;
 			}
 		}
@@ -98,7 +98,7 @@ namespace Twitch.Commands
 			if ( TimeSinceLastKilled > 10f && Pl.ExercisePoints > 110f )
 			{
 				Pl.KillTerry( Vector3.Zero );
-				TSSGame.Current.AddHudMessage( "smites Terry!", msg.DisplayName, msg.Color );
+				TSSGame.AddHudMessage( "smites Terry!", msg.DisplayName, msg.Color );
 				TimeSinceLastKilled = 0f;
 			}
 		}
@@ -119,8 +119,9 @@ namespace Twitch.Commands
 			Log.Info( "CHER" );
 			if ( TimeSinceCheered > 0.5f )
 			{
+				Random Rand = new Random();
 				Sound.FromScreen( $"cheering_0{Rand.Int( 1, 3 )}" );
-				TSSGame.Current.AddHudMessage( "motivates Terry!", msg.DisplayName, msg.Color );
+				TSSGame.AddHudMessage( "motivates Terry!", msg.DisplayName, msg.Color );
 				TimeSinceCheered = 0f;
 			}
 		}

@@ -58,13 +58,13 @@ namespace TSS.UI
 			switch ( c )
 			{
 				case '0':
-					return Input.UsingController ? Input.GetGlyph( InputButton.Use, InputGlyphSize.Medium ) : Input.GetGlyph( InputButton.Forward, InputGlyphSize.Medium );
+					return Input.GetGlyph( "forward", InputGlyphSize.Medium );
 				case '1':
-					return Input.UsingController ? Input.GetGlyph( InputButton.Jump, InputGlyphSize.Medium ) : Input.GetGlyph( InputButton.Back, InputGlyphSize.Medium );
+					return Input.GetGlyph( "backward", InputGlyphSize.Medium );
 				case '3':
-					return Input.UsingController ? Input.GetGlyph( InputButton.Reload, InputGlyphSize.Medium ) : Input.GetGlyph( InputButton.Left, InputGlyphSize.Medium );
+					return Input.GetGlyph( "left", InputGlyphSize.Medium );
 				case '2':
-					return Input.UsingController ? Input.GetGlyph( InputButton.Duck, InputGlyphSize.Medium ) : Input.GetGlyph( InputButton.Right, InputGlyphSize.Medium );
+					return Input.GetGlyph( "right", InputGlyphSize.Medium );
 			}
 			return null;
 		}
@@ -96,7 +96,7 @@ namespace TSS.UI
 					Scales[i] = Scales[i].LerpTo( 0.7f, Time.Delta * 8f );
 					letter.Style.FontColor = Color.White;
 					letter.Style.BackgroundTint = Color.White;
-					if ( Local.Pawn is TSSPlayer pl2 )
+					if ( Game.LocalPawn is TSSPlayer pl2 )
 					{
 						if ( pl2.CanGoToHeaven )
 						{
@@ -171,7 +171,7 @@ namespace TSS.UI
 			}
 
 			timer.Style.Width = Length.Fraction( MyQT.TimeSinceSpawned / 3f );
-			if ( Local.Pawn is TSSPlayer pl )
+			if ( Game.LocalPawn is TSSPlayer pl )
 			{
 				if ( pl.CanGoToHeaven )
 				{

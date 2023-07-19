@@ -2,26 +2,10 @@
 
 Layer0
 {
-	shader "window_impostor.vfx"
+	shader "shaders/sky.shader"
 
-	//---- Color ----
-	g_flModelTintAmount "1.000"
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-
-	//---- Cubemap ----
-	CubemapColor "materials/skybox/cosmos_cube.png"
-
-	//---- Fade ----
-	g_flFadeExponent "1.000"
-
-	//---- Material ----
-	TextureColor "materials/default/default_color.tga"
-	TextureTintMask "materials/default/default.tga"
-
-	//---- Texture Coordinates ----
-	g_nScaleTexCoordUByModelScaleAxis "0"
-	g_nScaleTexCoordVByModelScaleAxis "0"
-	g_vTexCoordOffset "[0.000 0.000]"
-	g_vTexCoordScale "[1.000 1.000]"
-	g_vTexCoordScrollSpeed "[0.000 0.000]"
+	//---- Texture ----
+	g_flBrightnessExposureBias "0.000"
+	g_flRenderOnlyExposureBias "0.000"
+	SkyTexture "materials/skybox/cosmos_cube.png"
 }

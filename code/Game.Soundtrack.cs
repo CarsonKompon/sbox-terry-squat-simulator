@@ -116,7 +116,7 @@ namespace TSS
 	}
 
 
-	public partial class TSSGame : Game
+	public partial class TSSGame
 	{
 		public List<Sound> Music;
 		public float[] volumes;
@@ -197,8 +197,8 @@ namespace TSS
 
 			var track = new MusicLayer( s );
 			track.SetVolume( 0f );
-			Tracks.Add( track );
-			TrackQueue.Enqueue( track );
+			Current.Tracks.Add( track );
+			Current.TrackQueue.Enqueue( track );
 
 		}
 
@@ -221,24 +221,24 @@ namespace TSS
 		[ClientRpc]
 		public void PlayRantInstrumental()
 		{
-			RantInstrumental = new MusicLayer( "rant_instrumental" );
-			RantInstrumental.FadeTo( 1f, 5f );
+			Current.RantInstrumental = new MusicLayer( "rant_instrumental" );
+			Current.RantInstrumental.FadeTo( 1f, 5f );
 			Log.Info( "PLAYING RANT INSTRUMENTAL" );
 			Silence();
-			PlayRant();
+			Current.PlayRant();
 		}
 
 		[ClientRpc]
 		public void StopInstrumental()
 		{
-			RantInstrumental.FadeTo( 0f, 1f );
+			Current.RantInstrumental.FadeTo( 0f, 1f );
 		}
 
 		[ClientRpc]
 		public void StartNature()
 		{
-			NatureSounds = new MusicLayer( "naturewind" );
-			NatureSounds.FadeTo( 1f, 10f );
+			Current.NatureSounds = new MusicLayer( "naturewind" );
+			Current.NatureSounds.FadeTo( 1f, 10f );
 		}
 
 
@@ -316,7 +316,6 @@ namespace TSS
 			volumes[v] = volume;
 		}
 
-
 		[ClientRpc]
 		public void Silence()
 		{
@@ -337,7 +336,7 @@ namespace TSS
 		}
 
 
-		[Event.Frame]
+		[GameEvent.Client.Frame]
 		public void Volume()
 		{
 			if ( Music == null )
@@ -345,7 +344,7 @@ namespace TSS
 				return;
 			}
 
-			Log.Info( $"Music Count:{Music.Count}" );
+			//Log.Info( $"Music Count:{Music.Count}" );
 
 			for ( int i = 0; i < Music.Count; i++ )
 			{

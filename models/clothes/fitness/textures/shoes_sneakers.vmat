@@ -2,19 +2,12 @@
 
 Layer0
 {
-	shader "vr_simple.vfx"
-
-	//---- PBR ----
-	F_AMBIENT_OCCLUSION_TEXTURE 1
-	F_METALNESS_TEXTURE 1
-
-	//---- Ambient Occlusion ----
-	TextureAmbientOcclusion "models/clothes/fitness/textures/Shoe_ao.png"
+	shader "shaders/simple.shader"
 
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "models/clothes/fitness/textures/Shoe_color.png"
+	TextureColor "materials/default/default_color.tga"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -22,18 +15,15 @@ Layer0
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Lighting ----
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
 	//---- Metalness ----
-	TextureMetalness "materials/default/default_metal.tga"
+	g_flMetalness "0.000"
 
 	//---- Normal ----
-	TextureNormal "models/clothes/fitness/textures/Shoe_normal.png"
+	TextureNormal "materials/default/default_normal.tga"
 
 	//---- Roughness ----
-	TextureRoughness "models/clothes/fitness/textures/Shoe_rough.png"
+	g_flRoughnessScaleFactor "1.000"
+	TextureRoughness "materials/default/default_rough.tga"
 
 	//---- Texture Coordinates ----
 	g_nScaleTexCoordUByModelScaleAxis "0"
